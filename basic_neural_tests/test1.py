@@ -49,12 +49,12 @@ def main():
 
     # input layer with 500 neuron each contains 784 input's; 
     # distribution: normal(Gaussian)
-    # activation func: rectifier(ReLU); see more: https://en.wikipedia.org/wiki/Rectifier_(neural_networks) 
+    # activation func: rectifier(ReLU); see more: https://en.wikipedia.org/wiki/Rectifier_(neural_networks)
     neural.add(Dense(500, input_dim=784, kernel_initializer='normal', activation='relu')) 
 
     # output layer with 10 neuron
     # distribution: normal(Gaussian)
-    # activation func: softmax; see more: https://en.wikipedia.org/wiki/Softmax_function
+    # activation func: softmax; see more:   
     neural.add(Dense(10, kernel_initializer='normal', activation='softmax'))
 
     # compiling neural
@@ -65,8 +65,23 @@ def main():
 
     print(neural.summary())
 
+    # MACHINE LEARNING
+
+    # batching size - value using in stohastic gradient descent
+    # neural epoch - how long to train on one data set
+    # verbose - giving some technical information
+    neural.fit(x_training_set, y_training_set, batch_size=100, nb_epoch=100, verbose=1)
+
+    # ???
+    # # setting predictions
+    # predictions = neural.predict(x_training_set)
+    # predictions = numpy.argmax(predictions, axis=1)
+
+    scores = neural.evaluate(x_test_set, y_test_set, verbose=0)
+    print('ACCURACY:%.3f%%' % (scores[1]*100))
+
 if __name__ == '__main__':
     main()
-    print('test#1 done...')
+    print('test #1 done...')
 else:
     pass
